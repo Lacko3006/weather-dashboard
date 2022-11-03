@@ -1,6 +1,12 @@
-const weatherDashboardElement = document.querySelector("#weather-dashboard")
+const weatherDashboardElement = document.querySelector("#weather-dashboard");
+const inputValue = document.querySelector("#data-input");
+let searchButton = document.querySelector("#search-btn");
 
+searchButton.addEventListener("click", weatherSearch);
 
+function weatherSearch(){
+  
+}
 
 function getApi(requestUrl) {
   fetch(weatherBoardUrl)
@@ -10,26 +16,25 @@ function getApi(requestUrl) {
     })
     .then(function (data) {
       console.log(data);
-    //   weatherDashboardElement.textContent = data.city.sunrise
+      //   weatherDashboardElement.textContent = data.city.sunrise
     });
 }
 
-getApi(weatherBoardUrl)
+getApi(weatherBoardUrl);
 
 function getGeocodingUrl(geocodingUrl) {
-    fetch(geocodingUrl)
-      .then(function (response) {
-        console.log(response);
-        return response.json();
-      })
-      .then(function (data) {
-        console.log(data);
-        weatherDashboardElement.textContent = data[0].lat
-      });
-  }
-  
-  getGeocodingUrl(geocodingUrl)
+  fetch(geocodingUrl)
+    .then(function (response) {
+      console.log(response);
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      weatherDashboardElement.textContent = data[0].lat;
+    });
+}
 
+getGeocodingUrl(geocodingUrl);
 
 // let geocodingUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" //input.value "appid=d55f24fccb2e40d4eec3016c984da28e";
 
