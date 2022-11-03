@@ -1,3 +1,20 @@
 * {
     box-sizing: border-box;
   }
+
+  #data-cards {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+
+  .card {
+    height: 300px;
+    width: 200px;
+    border: 1px solid black;
+  }
+
+  .input-button{
+    display: flex;
+    justify-content: center;
+  }
