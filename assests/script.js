@@ -34,13 +34,14 @@ function weatherSearch() {
           temperatureElement[j].textContent = "Temperature: "+data.list[i].main.temp
           humidityElement[j].textContent = "Humidity: " + data.list[i].main.humidity;
           iconElement[j].src="http://openweathermap.org/img/wn/"+data.list[i].weather[0].icon+".png"
-          j = j + 1;
+          j = j + 1;}
         const saveSearchElement = document.createElement('li')
                 saveSearchElement.textContent = inputValue.value
                  searchListElement.appendChild(saveSearchElement)
-                 console.log(searchListElement)
-        }
-      });
+                 console.log(saveSearchElement)
+        })
+        saveSearchElement.textContent = searchListElement.value
+      ;
   }
 
   getApi(weatherBoardUrl);
