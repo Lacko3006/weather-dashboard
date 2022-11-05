@@ -8,6 +8,7 @@ const windElement = document.querySelectorAll(".wind");
 const temperatureElement = document.querySelectorAll(".temperature")
 const humidityElement = document.querySelectorAll(".humidity")
 const timeElement = document.querySelectorAll(".time");
+const iconElement = document.querySelectorAll(".icon")
 
 searchButton.addEventListener("click", weatherSearch);
 
@@ -32,7 +33,8 @@ function weatherSearch() {
           timeElement[j].textContent = "Current date: "+ data.list[i].dt_txt;
           temperatureElement[j].textContent = "Temperature: "+data.list[i].main.temp
           humidityElement[j].textContent = "Humidity: " + data.list[i].main.humidity;
-          console.log(data.list[i].dt_txt);
+          iconElement[j].src="http://openweathermap.org/img/wn/"+data.list[i].weather[0].icon+".png"
+          console.log(data.list[i].weather[0].icon)
           j = j + 1;
         }
           saveSearchElement.textContent = data.city.name;

@@ -2,6 +2,15 @@
     box-sizing: border-box;
   }
 
+  h1 {
+    display: flex;
+    justify-content: center;
+  }
+
+  body {
+    background-color: skyblue;
+  }
+
   #data-cards {
     display: flex;
     justify-content: space-between;
@@ -22,4 +31,16 @@
   .name {
     display: flex;
     justify-content: center;
+  }
+
+  img {
+    height: 50px;
+    width: 50px;
+  }
+
+  span {
+    display: flex;
+    margin: 10px;
+    padding: 10px;
+    font-size: 20px;
   }
