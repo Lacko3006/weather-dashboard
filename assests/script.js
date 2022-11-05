@@ -35,12 +35,12 @@ function weatherSearch() {
           humidityElement[j].textContent = "Humidity: " + data.list[i].main.humidity;
           iconElement[j].src="http://openweathermap.org/img/wn/"+data.list[i].weather[0].icon+".png"
           j = j + 1;}
-        const saveSearchElement = document.createElement('li')
-                saveSearchElement.textContent = inputValue.value
-                 searchListElement.appendChild(saveSearchElement)
-                 console.log(saveSearchElement)
+        const saveSearch = document.createElement('li')
+                saveSearch.textContent = inputValue.value
+                 searchListElement.appendChild(saveSearch)
+                 console.log(saveSearch)
+                 saveSearchElement.textContent = data.city.name;
         })
-        saveSearchElement.textContent = searchListElement.value
       ;
   }
 
