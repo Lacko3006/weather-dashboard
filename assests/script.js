@@ -41,6 +41,7 @@ function weatherSearch() {
         searchHistory = searchHistory.concat(savedSearch)
         console.log(searchHistory)
         saveSearchElement.textContent = searchHistory
+        // turn array into list and links
 
   })
 
