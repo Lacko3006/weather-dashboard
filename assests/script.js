@@ -5,7 +5,9 @@ const saveSearchElement = document.querySelector(".saved-search");
 const dataCardsElement = document.querySelectorAll(".card");
 const cityNameElement = document.querySelectorAll(".name");
 const windElement = document.querySelectorAll(".wind");
-
+const temperatureElement = document.querySelectorAll(".temperature")
+const humidityElement = document.querySelectorAll(".humidity")
+const timeElement = document.querySelectorAll(".time");
 
 searchButton.addEventListener("click", weatherSearch);
 
@@ -24,10 +26,13 @@ function weatherSearch() {
         let j = 0;
         let dataStored = data.list;
         cityNameElement[j].textContent = data.city.name;
+
         for (i = 0; i < dataStored.length; i = i + 8) {
-          windElement[j].textContent = data.list[i].wind.speed;
-          
-          console.log(data.list[i].wind.speed);
+          windElement[j].textContent = "Wind speed: " + data.list[i].wind.speed;
+          timeElement[j].textContent = "Current date: "+ data.list[i].dt_txt;
+          temperatureElement[j].textContent = "Temperature: "+data.list[i].main.temp
+          humidityElement[j].textContent = "Humidity: " + data.list[i].main.humidity;
+          console.log(data.list[i].dt_txt);
           j = j + 1;
         }
           saveSearchElement.textContent = data.city.name;
