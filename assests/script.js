@@ -12,6 +12,8 @@ const iconElement = document.querySelectorAll(".icon");
 
 searchButton.addEventListener("click", weatherSearch);
 
+let searchHistory = [];
+
 function weatherSearch() {
   let weatherBoardUrl =
     "https://api.openweathermap.org/data/2.5/forecast?q=" +
@@ -27,22 +29,21 @@ function weatherSearch() {
         let j = 0;
         let dataStored = data.list;
         cityNameElement[j].textContent = data.city.name;
-        const searchListElement = document.createElement('ul')
         for (i = 0; i < dataStored.length; i = i + 8) {
           windElement[j].textContent = "Wind speed: " + data.list[i].wind.speed;
           timeElement[j].textContent = "Current date: "+ data.list[i].dt_txt;
-          temperatureElement[j].textContent = "Temperature: "+data.list[i].main.temp
+          temperatureElement[j].textContent = "Temperature: " + Math.round(data.list[i].main.temp - 273.15)+" C"
           humidityElement[j].textContent = "Humidity: " + data.list[i].main.humidity;
           iconElement[j].src="http://openweathermap.org/img/wn/"+data.list[i].weather[0].icon+".png"
-          j = j + 1;}
-        const saveSearch = document.createElement('li')
-                saveSearch.textContent = inputValue.value
-                 searchListElement.appendChild(saveSearch)
-                 console.log(saveSearch)
-                 saveSearchElement.textContent = data.city.name;
-        })
-      ;
-  }
+          j = j + 1;
+        }
+        savedSearch = inputValue.value
+        searchHistory = searchHistory.concat(savedSearch)
+        console.log(searchHistory)
+        saveSearchElement.textContent = searchHistory
 
+  })
+
+  }
   getApi(weatherBoardUrl);
 }
