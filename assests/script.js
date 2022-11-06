@@ -37,11 +37,10 @@ function weatherSearch() {
           iconElement[j].src="http://openweathermap.org/img/wn/"+data.list[i].weather[0].icon+".png"
           j = j + 1;
         }
-        savedSearch = inputValue.value
+        savedSearch = data.city.name
         searchHistory = searchHistory.concat(savedSearch)
         console.log(searchHistory)
         saveSearchElement.textContent = searchHistory
-        // turn array into list and links
 
   })
 
