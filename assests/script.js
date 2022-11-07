@@ -11,8 +11,6 @@ const timeElement = document.querySelectorAll(".time");
 const iconElement = document.querySelectorAll(".icon");
 let searchHistory = JSON.parse(localStorage.getItem("search")) || [];
 
-// searchButton.addEventListener("click", weatherSearch);
-
 function weatherSearch(searchValue) {
   let historySearch = searchValue || inputValue.value 
   let weatherBoardUrl =
@@ -77,4 +75,6 @@ function searchHistoryLengthControl() {
 if (searchHistory.length > 4) {
   localStorage.setItem("search", JSON.stringify(searchHistory));
   searchHistory.shift()
-}}
+} else (searchHistory.length < 4)
+localStorage.clear()
+}
