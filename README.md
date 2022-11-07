@@ -7,7 +7,7 @@ This web application a weather dashboard and is used to search any city for the 
 This project was build to demonstrate my ability to incorporate the openweather API and present the searched city.
 
 ## Mock Up
-![Weather Dashboard]
+![Weather Dashboard](./assests/images/weather-dashboard.png)
 
 ## Link
 https://lacko3006.github.io/weather-dashboard/
