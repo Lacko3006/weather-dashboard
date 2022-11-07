@@ -5,14 +5,13 @@ let saveSearchElement = document.querySelector(".saved-search");
 const dataCardsElement = document.querySelectorAll(".card");
 const cityNameElement = document.querySelectorAll(".name");
 const windElement = document.querySelectorAll(".wind");
-const temperatureElement = document.querySelectorAll(".temperature")
-const humidityElement = document.querySelectorAll(".humidity")
+const temperatureElement = document.querySelectorAll(".temperature");
+const humidityElement = document.querySelectorAll(".humidity");
 const timeElement = document.querySelectorAll(".time");
 const iconElement = document.querySelectorAll(".icon");
+let searchHistory = JSON.parse(localStorage.getItem("search")) || [];
 
 searchButton.addEventListener("click", weatherSearch);
-
-let searchHistory = [];
 
 function weatherSearch() {
   let weatherBoardUrl =
@@ -31,19 +30,37 @@ function weatherSearch() {
         cityNameElement[j].textContent = data.city.name;
         for (i = 0; i < dataStored.length; i = i + 8) {
           windElement[j].textContent = "Wind speed: " + data.list[i].wind.speed;
-          timeElement[j].textContent = "Current date: "+ data.list[i].dt_txt;
-          temperatureElement[j].textContent = "Temperature: " + Math.round(data.list[i].main.temp - 273.15)+" C"
-          humidityElement[j].textContent = "Humidity: " + data.list[i].main.humidity;
-          iconElement[j].src="http://openweathermap.org/img/wn/"+data.list[i].weather[0].icon+".png"
+          timeElement[j].textContent = "Current date: " + data.list[i].dt_txt;
+          temperatureElement[j].textContent =
+            "Temperature: " +
+            Math.round(data.list[i].main.temp - 273.15) +
+            " C";
+          humidityElement[j].textContent =
+            "Humidity: " + data.list[i].main.humidity;
+          iconElement[j].src =
+            "http://openweathermap.org/img/wn/" +
+            data.list[i].weather[0].icon +
+            ".png";
           j = j + 1;
         }
-        savedSearch = data.city.name
-        searchHistory = searchHistory.concat(savedSearch)
-        console.log(searchHistory)
-        saveSearchElement.textContent = searchHistory
 
-  })
-
+        // savedSearch = inputValue.value
+        // searchHistory = searchHistory.concat(savedSearch)
+        // console.log(searchHistory)
+        // saveSearchElement.textContent = searchHistory
+        // savedSearch = data.city.name
+        // searchHistory = searchHistory.concat(savedSearch)
+        // console.log(searchHistory)
+        // saveSearchElement.textContent = searchHistory
+      });
   }
   getApi(weatherBoardUrl);
 }
+
+searchButton.addEventListener("click", function () {
+  const searchTerm = inputValue.value;
+  weatherSearch(searchTerm);
+  searchHistory.push(searchTerm);
+  localStorage.setItem("search", JSON.stringify(searchHistory));
+  console.log(weatherSearch);
+});
