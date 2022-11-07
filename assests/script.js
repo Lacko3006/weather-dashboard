@@ -15,37 +15,36 @@ searchButton.addEventListener("click", weatherSearch);
 
 function weatherSearch() {
   let weatherBoardUrl =
-    "https://api.openweathermap.org/data/2.5/forecast?q=" +
-    inputValue.value +
-    "&appid=d55f24fccb2e40d4eec3016c984da28e";
-  function getApi(requestUrl) {
-    fetch(weatherBoardUrl)
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        console.log(data);
-        let j = 0;
-        let dataStored = data.list;
-        cityNameElement[j].textContent = data.city.name;
-        for (i = 0; i < dataStored.length; i = i + 8) {
-          windElement[j].textContent = "Wind speed: " + data.list[i].wind.speed;
-          timeElement[j].textContent = "Current date: " + data.list[i].dt_txt;
-          temperatureElement[j].textContent =
-            "Temperature: " +
-            Math.round(data.list[i].main.temp - 273.15) +
-            " C";
-          humidityElement[j].textContent =
-            "Humidity: " + data.list[i].main.humidity;
-          iconElement[j].src =
-            "http://openweathermap.org/img/wn/" +
-            data.list[i].weather[0].icon +
-            ".png";
-          j = j + 1;
-        }
-      });
-  }
-  getApi(weatherBoardUrl);
+    "https://api.openweathermap.org/data/2.5/forecast?q="+inputValue.value+"&appid=d55f24fccb2e40d4eec3016c984da28e";
+    getApi(weatherBoardUrl)
+}
+
+function getApi(requestUrl) {
+  fetch(requestUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      let j = 0;
+      let dataStored = data.list;
+      cityNameElement[j].textContent = data.city.name;
+      for (i = 0; i < dataStored.length; i = i + 8) {
+        windElement[j].textContent = "Wind speed: " + data.list[i].wind.speed;
+        timeElement[j].textContent = "Current date: " + data.list[i].dt_txt;
+        temperatureElement[j].textContent =
+          "Temperature: " +
+          Math.round(data.list[i].main.temp - 273.15) +
+          " C";
+        humidityElement[j].textContent =
+          "Humidity: " + data.list[i].main.humidity;
+        iconElement[j].src =
+          "http://openweathermap.org/img/wn/" +
+          data.list[i].weather[0].icon +
+          ".png";
+        j = j + 1;
+      }
+    });
 }
 
 searchButton.addEventListener("click", function () {
@@ -61,6 +60,7 @@ function renderSearchHistory() {
   for (let i = 0; i < searchHistory.length; i++) {
     const historyItem = document.createElement("input");
     historyItem.setAttribute("type", "text");
+    historyItem.setAttribute("readonly", true);
     historyItem.setAttribute("value", searchHistory[i]);
     historyItem.addEventListener("click", function () {
       weatherSearch(historyItem.value);
@@ -69,3 +69,9 @@ function renderSearchHistory() {
     saveSearchElement.append(historyItem);
   }
 }
+
+// function searchHistoryLengthControl()
+// if (searchHistory.length > 0) {
+//   weatherSearch(searchHistory[searchHistory.length - 1]);
+//   console.log("hello")
+// }

@@ -49,9 +49,9 @@
     font-size: 20px;
   }
 
-  .saved-search {
-    margin-top: 50px;
-    height: 100px;
-    width: 300px;
-    border: 1px solid black;
+  #saved-search {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100px;
   }
