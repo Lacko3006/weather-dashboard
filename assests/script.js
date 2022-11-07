@@ -11,11 +11,12 @@ const timeElement = document.querySelectorAll(".time");
 const iconElement = document.querySelectorAll(".icon");
 let searchHistory = JSON.parse(localStorage.getItem("search")) || [];
 
-searchButton.addEventListener("click", weatherSearch);
+// searchButton.addEventListener("click", weatherSearch);
 
-function weatherSearch() {
+function weatherSearch(searchValue) {
+  let historySearch = searchValue || inputValue.value 
   let weatherBoardUrl =
-    "https://api.openweathermap.org/data/2.5/forecast?q="+inputValue.value+"&appid=d55f24fccb2e40d4eec3016c984da28e";
+    "https://api.openweathermap.org/data/2.5/forecast?q="+historySearch+"&appid=d55f24fccb2e40d4eec3016c984da28e";
     getApi(weatherBoardUrl)
 }
 
@@ -53,6 +54,7 @@ searchButton.addEventListener("click", function () {
   searchHistory.push(searchTerm);
   localStorage.setItem("search", JSON.stringify(searchHistory));
   renderSearchHistory();
+  searchHistoryLengthControl()
 });
 
 function renderSearchHistory() {
@@ -61,17 +63,18 @@ function renderSearchHistory() {
     const historyItem = document.createElement("input");
     historyItem.setAttribute("type", "text");
     historyItem.setAttribute("readonly", true);
-    historyItem.setAttribute("value", searchHistory[i]);
+    // historyItem.setAttribute("value", searchHistory[i]);
+    historyItem.value = searchHistory[i]
     historyItem.addEventListener("click", function () {
       weatherSearch(historyItem.value);
-      console.log(historyItem);
+      console.log(historyItem.value);
     });
     saveSearchElement.append(historyItem);
   }
 }
 
-// function searchHistoryLengthControl()
-// if (searchHistory.length > 0) {
-//   weatherSearch(searchHistory[searchHistory.length - 1]);
-//   console.log("hello")
-// }
+function searchHistoryLengthControl() {
+if (searchHistory.length > 4) {
+  localStorage.setItem("search", JSON.stringify(searchHistory));
+  searchHistory.shift()
+}}
