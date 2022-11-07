@@ -29,7 +29,7 @@ function getApi(requestUrl) {
       let dataStored = data.list;
       cityNameElement[j].textContent = data.city.name;
       for (i = 0; i < dataStored.length; i = i + 8) {
-        windElement[j].textContent = "Wind speed: " + data.list[i].wind.speed;
+        windElement[j].textContent = "Wind speed: " + data.list[i].wind.speed + "MPH"
         timeElement[j].textContent = "Current date: " + data.list[i].dt_txt;
         temperatureElement[j].textContent =
           "Temperature: " +
@@ -65,7 +65,6 @@ function renderSearchHistory() {
     historyItem.value = searchHistory[i]
     historyItem.addEventListener("click", function () {
       weatherSearch(historyItem.value);
-      console.log(historyItem.value);
     });
     saveSearchElement.append(historyItem);
   }
@@ -75,6 +74,4 @@ function searchHistoryLengthControl() {
 if (searchHistory.length > 4) {
   localStorage.setItem("search", JSON.stringify(searchHistory));
   searchHistory.shift()
-} else (searchHistory.length < 4)
-localStorage.clear()
-}
+}}
