@@ -1,7 +1,7 @@
 const weatherDashboardElement = document.querySelector("#weather-dashboard");
 const inputValue = document.querySelector("#data-input");
 const searchButton = document.querySelector("#search-btn");
-let saveSearchElement = document.querySelector(".saved-search");
+let saveSearchElement = document.querySelector("#saved-search");
 const dataCardsElement = document.querySelectorAll(".card");
 const cityNameElement = document.querySelectorAll(".name");
 const windElement = document.querySelectorAll(".wind");
@@ -43,15 +43,6 @@ function weatherSearch() {
             ".png";
           j = j + 1;
         }
-
-        // savedSearch = inputValue.value
-        // searchHistory = searchHistory.concat(savedSearch)
-        // console.log(searchHistory)
-        // saveSearchElement.textContent = searchHistory
-        // savedSearch = data.city.name
-        // searchHistory = searchHistory.concat(savedSearch)
-        // console.log(searchHistory)
-        // saveSearchElement.textContent = searchHistory
       });
   }
   getApi(weatherBoardUrl);
@@ -62,5 +53,19 @@ searchButton.addEventListener("click", function () {
   weatherSearch(searchTerm);
   searchHistory.push(searchTerm);
   localStorage.setItem("search", JSON.stringify(searchHistory));
-  console.log(weatherSearch);
+  renderSearchHistory();
 });
+
+function renderSearchHistory() {
+  saveSearchElement.innerHTML = "";
+  for (let i = 0; i < searchHistory.length; i++) {
+    const historyItem = document.createElement("input");
+    historyItem.setAttribute("type", "text");
+    historyItem.setAttribute("value", searchHistory[i]);
+    historyItem.addEventListener("click", function () {
+      weatherSearch(historyItem.value);
+      console.log(historyItem);
+    });
+    saveSearchElement.append(historyItem);
+  }
+}
